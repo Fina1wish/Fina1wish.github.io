@@ -117,13 +117,13 @@ const petPlayBtn = document.getElementById("pet-play");
 
 const PET_KEY = "pet-state";
 
-// 成长阶段:按领养天数进化
+// 成长阶段:按领养天数进化(小猫养成记)
 const PET_STAGES = [
-  { days: 0, emoji: "🐣" },
-  { days: 1, emoji: "🐥" },
-  { days: 3, emoji: "🐤" },
-  { days: 7, emoji: "🐔" },
-  { days: 30, emoji: "🦚" }
+  { days: 0, emoji: "🐱" },
+  { days: 1, emoji: "🐈" },
+  { days: 3, emoji: "🐈‍⬛" },
+  { days: 7, emoji: "🐯" },
+  { days: 30, emoji: "🦁" }
 ];
 
 let pet = loadPet();
@@ -193,24 +193,24 @@ function react(text) {
 
 petFeedBtn.addEventListener("click", () => {
   if (pet.hunger >= 100) {
-    react("🍚 已经吃撑啦!");
+    react("🐟 已经吃撑啦!");
     return;
   }
   pet.hunger = Math.min(100, pet.hunger + 30);
   savePet();
   updatePet();
-  react("🍚 好吃! +❤");
+  react("🐟 好吃! +❤");
 });
 
 petPlayBtn.addEventListener("click", () => {
   if (pet.mood >= 100) {
-    react("🎾 玩累啦,休息一下~");
+    react("🧶 玩累啦,休息一下~");
     return;
   }
   pet.mood = Math.min(100, pet.mood + 25);
   savePet();
   updatePet();
-  react("🎾 开心! ⭐");
+  react("🧶 开心! ⭐");
 });
 
 petNameBtn.addEventListener("click", () => {
