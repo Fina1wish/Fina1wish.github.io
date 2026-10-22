@@ -264,6 +264,12 @@ a {
   color: var(--text-muted);
 }
 
+.project-link {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  padding: 0.4rem 1.1rem;
+}
+
 /* ===== 今日运势 ===== */
 .fortune-card {
   background: var(--bg-soft);

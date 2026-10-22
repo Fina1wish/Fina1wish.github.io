@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 学习助手 | Fina1wish</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="ai.css">
+</head>
+<body>
+
+  <!-- 顶部导航(和首页一致) -->
+  <header class="site-header">
+    <nav class="nav">
+      <a class="logo" href="../index.html">Fina1wish</a>
+      <div class="nav-links">
+        <a href="../index.html#about">关于我</a>
+        <a href="../index.html#skills">技能</a>
+        <a href="../index.html#fortune">运势</a>
+        <a href="../index.html#pet">宠物</a>
+        <a href="../index.html#projects">作品</a>
+        <a href="../index.html#contact">联系</a>
+      </div>
+      <button id="theme-toggle" class="theme-btn" title="切换暗色模式">🌙</button>
+    </nav>
+  </header>
+
+  <main class="section ai-page">
+    <h1 class="ai-title">AI 学习助手 <span class="gradient-text">问它</span></h1>
+    <p class="ai-sub">不懂的知识点,直接问。选择难度,它会用你能听懂的方式讲清楚。</p>
+
+    <!-- 难度选择 -->
+    <div class="level-bar" role="radiogroup" aria-label="选择讲解难度">
+      <button class="level-btn" data-level="小学">小学</button>
+      <button class="level-btn" data-level="初中">初中</button>
+      <button class="level-btn" data-level="高中">高中</button>
+      <button class="level-btn active" data-level="大学">大学</button>
+    </div>
+
+    <!-- 对话区 -->
+    <div id="chat" class="chat"></div>
+
+    <!-- 输入区 -->
+    <div class="input-area">
+      <textarea id="question" rows="3" maxlength="4000"
+        placeholder="例如:什么是微积分?它有什么用?"></textarea>
+      <div class="input-row">
+        <span class="input-hint">Ctrl + Enter 发送</span>
+        <button id="send-btn" class="btn btn-primary">发送 🚀</button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Fina1wish · AI 学习助手由 Claude Haiku 驱动</p>
+  </footer>
+
+  <script src="ai.js"></script>
+</body>
+</html>
