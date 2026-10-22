@@ -103,3 +103,130 @@ fortuneBtn.addEventListener("click", () => {
     lockFortune();
   }, 1200);
 });
+
+// ===== 像素宠物 =====
+const petEmoji = document.getElementById("pet-emoji");
+const petReaction = document.getElementById("pet-reaction");
+const petStatus = document.getElementById("pet-status");
+const petHungerBar = document.getElementById("pet-hunger-bar");
+const petMoodBar = document.getElementById("pet-mood-bar");
+const petNameInput = document.getElementById("pet-name");
+const petNameBtn = document.getElementById("pet-name-btn");
+const petFeedBtn = document.getElementById("pet-feed");
+const petPlayBtn = document.getElementById("pet-play");
+
+const PET_KEY = "pet-state";
+
+// 成长阶段:按领养天数进化
+const PET_STAGES = [
+  { days: 0, emoji: "🐣" },
+  { days: 1, emoji: "🐥" },
+  { days: 3, emoji: "🐤" },
+  { days: 7, emoji: "🐔" },
+  { days: 30, emoji: "🦚" }
+];
+
+let pet = loadPet();
+
+function loadPet() {
+  const saved = localStorage.getItem(PET_KEY);
+  if (saved) return JSON.parse(saved);
+  // 第一次来:自动领养一只小宠物
+  const now = Date.now();
+  return { name: "", adopted: now, hunger: 90, mood: 90, lastSeen: now };
+}
+
+function savePet() {
+  localStorage.setItem(PET_KEY, JSON.stringify(pet));
+}
+
+// 按离线时长结算:每小时饿一点、无聊一点
+function applyDecay() {
+  const hours = (Date.now() - pet.lastSeen) / 36e5;
+  pet.hunger = Math.max(0, pet.hunger - hours * 3);
+  pet.mood = Math.max(0, pet.mood - hours * 2);
+  pet.lastSeen = Date.now();
+  savePet();
+}
+
+function petStage() {
+  const days = (Date.now() - pet.adopted) / 864e5;
+  let stage = PET_STAGES[0];
+  for (const s of PET_STAGES) {
+    if (days >= s.days) stage = s;
+  }
+  return { ...stage, days };
+}
+
+function updatePet() {
+  petEmoji.textContent = petStage().emoji;
+  petHungerBar.style.width = pet.hunger + "%";
+  petMoodBar.style.width = pet.mood + "%";
+  petHungerBar.classList.toggle("low", pet.hunger < 20);
+  petMoodBar.classList.toggle("low", pet.mood < 20);
+  petNameInput.value = pet.name;
+
+  const ageDays = Math.floor(petStage().days) + 1;
+  const name = pet.name || "小宠物";
+  if (pet.hunger < 20) {
+    petStatus.textContent = `${name}肚子好饿,快喂喂它!`;
+    petEmoji.classList.add("hungry");
+  } else if (pet.mood < 20) {
+    petStatus.textContent = `${name}有点无聊,陪它玩玩吧。`;
+    petEmoji.classList.remove("hungry");
+  } else {
+    petStatus.textContent = `${name} · 来到你家第 ${ageDays} 天,状态不错!`;
+    petEmoji.classList.remove("hungry");
+  }
+}
+
+// 宠物冒泡反应
+function react(text) {
+  petReaction.textContent = text;
+  petReaction.classList.add("show");
+  petEmoji.classList.add("bounce");
+  setTimeout(() => {
+    petReaction.classList.remove("show");
+    petEmoji.classList.remove("bounce");
+  }, 1400);
+}
+
+petFeedBtn.addEventListener("click", () => {
+  if (pet.hunger >= 100) {
+    react("🍚 已经吃撑啦!");
+    return;
+  }
+  pet.hunger = Math.min(100, pet.hunger + 30);
+  savePet();
+  updatePet();
+  react("🍚 好吃! +❤");
+});
+
+petPlayBtn.addEventListener("click", () => {
+  if (pet.mood >= 100) {
+    react("🎾 玩累啦,休息一下~");
+    return;
+  }
+  pet.mood = Math.min(100, pet.mood + 25);
+  savePet();
+  updatePet();
+  react("🎾 开心! ⭐");
+});
+
+petNameBtn.addEventListener("click", () => {
+  const name = petNameInput.value.trim();
+  if (name) {
+    pet.name = name;
+    savePet();
+    updatePet();
+    react(`你好呀,${name}!`);
+  }
+});
+
+// 开局:结算离线衰减并刷新界面;挂机时每分钟结算一次
+applyDecay();
+updatePet();
+setInterval(() => {
+  applyDecay();
+  updatePet();
+}, 60000);
