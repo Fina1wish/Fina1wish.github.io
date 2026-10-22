@@ -264,6 +264,119 @@ a {
   color: var(--text-muted);
 }
 
+/* ===== 今日运势 ===== */
+.fortune-card {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* 签筒:三支签探出头来 */
+.fortune-tube {
+  display: flex;
+  justify-content: center;
+  gap: 0.3rem;
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+}
+
+.fortune-tube span:nth-child(1) { transform: rotate(-18deg); }
+.fortune-tube span:nth-child(2) { transform: translateY(-4px); }
+.fortune-tube span:nth-child(3) { transform: rotate(18deg); }
+
+/* 抽签时的摇动动画 */
+.fortune-tube.shaking {
+  animation: shake 0.45s ease-in-out 2;
+}
+
+@keyframes shake {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-10deg) translateY(-4px); }
+  50% { transform: rotate(9deg); }
+  75% { transform: rotate(-6deg) translateY(2px); }
+}
+
+.fortune-result {
+  animation: pop-in 0.45s ease-out;
+  margin-bottom: 1.2rem;
+}
+
+@keyframes pop-in {
+  from { opacity: 0; transform: translateY(10px) scale(0.97); }
+  to { opacity: 1; transform: none; }
+}
+
+/* 运势等级徽章,颜色按等级区分 */
+.fortune-level {
+  display: inline-block;
+  padding: 0.25rem 1rem;
+  border-radius: 999px;
+  color: #fff;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+
+[data-level="大吉"] { background: #ef4444; }
+[data-level="中吉"] { background: #f97316; }
+[data-level="小吉"] { background: #f59e0b; }
+[data-level="吉"] { background: #10b981; }
+[data-level="中平"] { background: var(--primary); }
+[data-level="小凶"] { background: #6b7280; }
+
+.fortune-verse {
+  font-size: 1.05rem;
+  margin-bottom: 0.8rem;
+}
+
+.fortune-details {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 0.8rem;
+}
+
+.fortune-detail {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* 幸运色色块 */
+.fortune-swatch {
+  display: inline-block;
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+}
+
+.fortune-advice {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.fortune-hint {
+  margin-top: 0.8rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* 抽过后按钮置灰 */
+.fortune-card .btn:disabled,
+.fortune-card .btn:disabled:hover {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
 /* ===== 联系 ===== */
 .contact-links {
   display: flex;

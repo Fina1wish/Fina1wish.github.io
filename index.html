@@ -15,6 +15,7 @@
       <div class="nav-links">
         <a href="#about">关于我</a>
         <a href="#skills">技能</a>
+        <a href="#fortune">今日运势</a>
         <a href="#projects">作品</a>
         <a href="#contact">联系</a>
       </div>
@@ -64,6 +65,29 @@
     </div>
   </section>
 
+  <!-- 今日运势 -->
+  <section id="fortune" class="section">
+    <h2 class="section-title">今日运势</h2>
+    <div class="fortune-card">
+      <!-- 签筒 -->
+      <div id="fortune-tube" class="fortune-tube" aria-hidden="true">
+        <span>🎋</span><span>🎋</span><span>🎋</span>
+      </div>
+      <!-- 抽签结果 -->
+      <div id="fortune-result" class="fortune-result" hidden>
+        <span id="fortune-level" class="fortune-level"></span>
+        <p id="fortune-verse" class="fortune-verse"></p>
+        <div class="fortune-details">
+          <span class="fortune-detail">幸运色 <span id="fortune-swatch" class="fortune-swatch"></span> <b id="fortune-color-name"></b></span>
+          <span class="fortune-detail">幸运数字 <b id="fortune-number"></b></span>
+        </div>
+        <p id="fortune-advice" class="fortune-advice"></p>
+      </div>
+      <button id="fortune-btn" class="btn btn-primary">抽一签</button>
+      <p id="fortune-hint" class="fortune-hint"></p>
+    </div>
+  </section>
+
   <!-- 作品 -->
   <section id="projects" class="section">
     <h2 class="section-title">作品</h2>
@@ -77,10 +101,10 @@
       </article>
       <!-- 以后做了新项目,复制上面的 article 块,改标题和描述即可 -->
       <article class="project-card">
-        <h3>第二个作品</h3>
-        <p>敬请期待……</p>
+        <h3>今日运势抽签</h3>
+        <p>每天抽一支签,看看今天的运势如何。</p>
         <div class="project-tags">
-          <span>进行中</span>
+          <span>HTML</span><span>CSS</span><span>JS</span>
         </div>
       </article>
     </div>
@@ -90,8 +114,7 @@
   <section id="contact" class="section">
     <h2 class="section-title">联系我</h2>
     <div class="contact-links">
-      <!-- 以后有了 GitHub 账号,取消下面这行的注释,并把用户名换成你自己的 -->
-      <!-- <a class="btn btn-secondary" href="https://github.com/你的用户名" target="_blank">GitHub</a> -->
+      <a class="btn btn-secondary" href="https://github.com/Fina1wish" target="_blank">GitHub</a>
       <a class="btn btn-secondary" href="mailto:2629859676@qq.com">邮箱</a>
     </div>
   </section>
